@@ -22,6 +22,17 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separar bibliotecas grandes em chunks específicos
+          'streamdown': ['streamdown'],
+          'recharts': ['recharts'],
+          'vendor': ['react', 'react-dom', 'wouter'],
+        },
+      },
+    },
   },
   server: {
     port: 3000,
