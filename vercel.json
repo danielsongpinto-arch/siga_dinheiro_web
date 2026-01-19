@@ -1,0 +1,15 @@
+{
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist/public",
+  "framework": "vite",
+  "env": {
+    "VITE_APP_TITLE": "DGP - Digital Growth Platform",
+    "VITE_APP_ID": "siga-dinheiro-web"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
