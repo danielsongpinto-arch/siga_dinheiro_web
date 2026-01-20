@@ -3,16 +3,16 @@ import mysql from "mysql2/promise";
 import { eq, desc } from "drizzle-orm";
 import * as schema from "../drizzle/schema";
 
-let db: any = null;
+let dbInstance: any = null;
 
 export async function getDb() {
-  if (!db) {
+  if (!dbInstance) {
     const connection = await mysql.createConnection(
       process.env.DATABASE_URL || ""
     );
-    db = drizzle(connection, { schema, mode: "default" });
+    dbInstance = drizzle(connection, { schema, mode: "default" });
   }
-  return db;
+  return dbInstance;
 }
 
 export async function getAllArticles() {

@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE articles ADD COLUMN read_time varchar(50) NOT NULL DEFAULT '20 min' AFTER theme_id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3n88SMULAgq9E7Q.f22bee286e10 --database 69y7WuinzH6nDMktXWY2qi --execute ALTER TABLE articles ADD COLUMN read_time varchar(50) NOT NULL DEFAULT '20 min' AFTER theme_id;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 878
+}

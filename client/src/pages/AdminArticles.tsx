@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit2, Trash2, X, Check } from "lucide-react";
 
-// Tipos de artigos
 interface Article {
   id: string;
   title: string;
@@ -14,7 +13,7 @@ interface Article {
   category: string;
   themeId: string;
   readTime: string;
-  date?: Date;
+  date: string;
 }
 
 const CATEGORIES = [
@@ -26,19 +25,43 @@ const CATEGORIES = [
 ];
 
 export default function AdminArticles() {
-  const [articles, setArticles] = useState<Article[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [formData, setFormData] = useState<Partial<Article>>({
     title: "",
     summary: "",
     content: "",
-    category: "arquitetos-do-poder",
+    category: "Arquitetos do Poder",
     themeId: "arquitetos-do-poder",
     readTime: "20 min",
   });
 
-  // Criar novo artigo
+  useEffect(() => {
+    loadArticles();
+  }, []);
+
+  const loadArticles = () => {
+    try {
+      const saved = localStorage.getItem("admin_articles");
+      if (saved) {
+        setArticles(JSON.parse(saved));
+      }
+    } catch (error) {
+      console.error("Erro ao carregar artigos:", error);
+    }
+  };
+
+  const saveArticles = (newArticles: Article[]) => {
+    try {
+      localStorage.setItem("admin_articles", JSON.stringify(newArticles));
+      setArticles(newArticles);
+    } catch (error) {
+      console.error("Erro ao salvar artigos:", error);
+      alert("Erro ao salvar artigos");
+    }
+  };
+
   const handleCreate = () => {
     if (!formData.title || !formData.summary || !formData.content) {
       alert("Preencha todos os campos obrigatórios");
@@ -46,73 +69,72 @@ export default function AdminArticles() {
     }
 
     const newArticle: Article = {
-      id: `article-${Date.now()}`,
-      title: formData.title || "",
-      summary: formData.summary || "",
-      content: formData.content || "",
-      category: formData.category || "arquitetos-do-poder",
+      id: `article-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      title: formData.title,
+      summary: formData.summary,
+      content: formData.content,
+      category: formData.category || "Arquitetos do Poder",
       themeId: formData.themeId || "arquitetos-do-poder",
       readTime: formData.readTime || "20 min",
-      date: new Date(),
+      date: new Date().toLocaleDateString("pt-BR"),
     };
 
-    setArticles([newArticle, ...articles]);
+    saveArticles([...articles, newArticle]);
     setFormData({
       title: "",
       summary: "",
       content: "",
-      category: "arquitetos-do-poder",
+      category: "Arquitetos do Poder",
       themeId: "arquitetos-do-poder",
       readTime: "20 min",
     });
     setIsCreating(false);
+    alert("Artigo criado com sucesso!");
   };
 
-  // Editar artigo
   const handleEdit = (article: Article) => {
     setEditingId(article.id);
     setFormData(article);
   };
 
-  // Salvar edição
   const handleSaveEdit = () => {
     if (!editingId) return;
 
-    setArticles(
-      articles.map((a) =>
-        a.id === editingId
-          ? {
-              ...a,
-              title: formData.title || a.title,
-              summary: formData.summary || a.summary,
-              content: formData.content || a.content,
-              category: formData.category || a.category,
-              themeId: formData.themeId || a.themeId,
-              readTime: formData.readTime || a.readTime,
-            }
-          : a
-      )
+    const updated = articles.map((article) =>
+      article.id === editingId
+        ? {
+            ...article,
+            title: formData.title || article.title,
+            summary: formData.summary || article.summary,
+            content: formData.content || article.content,
+            category: formData.category || article.category,
+            themeId: formData.themeId || article.themeId,
+            readTime: formData.readTime || article.readTime,
+          }
+        : article
     );
 
+    saveArticles(updated);
     setEditingId(null);
     setFormData({
       title: "",
       summary: "",
       content: "",
-      category: "arquitetos-do-poder",
+      category: "Arquitetos do Poder",
       themeId: "arquitetos-do-poder",
       readTime: "20 min",
     });
+    alert("Artigo atualizado com sucesso!");
   };
 
-  // Deletar artigo
   const handleDelete = (id: string) => {
     if (confirm("Tem certeza que deseja deletar este artigo?")) {
-      setArticles(articles.filter((a) => a.id !== id));
+      const filtered = articles.filter((article) => article.id !== id);
+      saveArticles(filtered);
+      alert("Artigo deletado com sucesso!");
     }
   };
 
-  // Cancelar
   const handleCancel = () => {
     setEditingId(null);
     setIsCreating(false);
@@ -120,7 +142,7 @@ export default function AdminArticles() {
       title: "",
       summary: "",
       content: "",
-      category: "arquitetos-do-poder",
+      category: "Arquitetos do Poder",
       themeId: "arquitetos-do-poder",
       readTime: "20 min",
     });
@@ -129,14 +151,13 @@ export default function AdminArticles() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
               Painel de Admin
             </h1>
             <p className="text-muted-foreground mt-1">
-              Gerencie seus artigos financeiros
+              Gerencie seus artigos ({articles.length} artigos)
             </p>
           </div>
           {!isCreating && !editingId && (
@@ -150,7 +171,6 @@ export default function AdminArticles() {
           )}
         </div>
 
-        {/* Formulário de Criação/Edição */}
         {(isCreating || editingId) && (
           <Card className="mb-8 p-6 border border-border">
             <h2 className="text-xl font-bold mb-4">
@@ -158,7 +178,6 @@ export default function AdminArticles() {
             </h2>
 
             <div className="space-y-4">
-              {/* Título */}
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Título *
@@ -173,7 +192,6 @@ export default function AdminArticles() {
                 />
               </div>
 
-              {/* Resumo */}
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Resumo *
@@ -189,7 +207,6 @@ export default function AdminArticles() {
                 />
               </div>
 
-              {/* Conteúdo */}
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Conteúdo *
@@ -205,16 +222,19 @@ export default function AdminArticles() {
                 />
               </div>
 
-              {/* Categoria */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Categoria
                   </label>
                   <select
-                    value={formData.category || "arquitetos-do-poder"}
+                    value={formData.themeId || "arquitetos-do-poder"}
                     onChange={(e) =>
-                      setFormData({ ...formData, category: e.target.value })
+                      setFormData({ 
+                        ...formData, 
+                        themeId: e.target.value,
+                        category: CATEGORIES.find(c => c.id === e.target.value)?.name || "Arquitetos do Poder"
+                      })
                     }
                     className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground"
                   >
@@ -226,7 +246,6 @@ export default function AdminArticles() {
                   </select>
                 </div>
 
-                {/* Tempo de Leitura */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Tempo de Leitura
@@ -242,12 +261,9 @@ export default function AdminArticles() {
                 </div>
               </div>
 
-              {/* Botões de Ação */}
               <div className="flex gap-2 pt-4">
                 <Button
-                  onClick={
-                    isCreating ? handleCreate : handleSaveEdit
-                  }
+                  onClick={isCreating ? handleCreate : handleSaveEdit}
                   className="gap-2 bg-green-600 hover:bg-green-700"
                 >
                   <Check className="w-4 h-4" />
@@ -266,12 +282,11 @@ export default function AdminArticles() {
           </Card>
         )}
 
-        {/* Lista de Artigos */}
         <div className="space-y-4">
           {articles.length === 0 ? (
             <Card className="p-8 text-center border border-border">
               <p className="text-muted-foreground">
-                Nenhum artigo criado ainda. Clique em "Novo Artigo" para começar.
+                Nenhum artigo. Clique em "Novo Artigo" para começar.
               </p>
             </Card>
           ) : (
@@ -291,12 +306,7 @@ export default function AdminArticles() {
                     <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
                       <span>📁 {article.category}</span>
                       <span>⏱️ {article.readTime}</span>
-                      {article.date && (
-                        <span>
-                          📅{" "}
-                          {new Date(article.date).toLocaleDateString("pt-BR")}
-                        </span>
-                      )}
+                      <span>📅 {article.date}</span>
                     </div>
                   </div>
 
@@ -306,6 +316,7 @@ export default function AdminArticles() {
                       size="sm"
                       variant="outline"
                       className="gap-1"
+                      disabled={editingId !== null}
                     >
                       <Edit2 className="w-4 h-4" />
                       Editar
