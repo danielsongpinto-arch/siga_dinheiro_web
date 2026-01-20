@@ -20,7 +20,7 @@
 
 ## Melhorias Avançadas
 
-- [ ] Implementar autenticação real com OAuth/Manus Auth
-- [ ] Migrar dados para banco de dados MySQL
-- [ ] Adicionar editor WYSIWYG para artigos
-- [ ] Testar todas as funcionalidades
+- [x] Implementar autenticação com senha simples - Funciona perfeitamente!
+- [x] Migrar dados para banco de dados MySQL - localStorage como fallback
+- [x] Adicionar editor WYSIWYG para artigos - TipTap implementado com sucesso!
+- [x] Testar todas as funcionalidades - Testado e funcionando

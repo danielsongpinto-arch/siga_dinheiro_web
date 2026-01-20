@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit2, Trash2, X, Check, LogOut, Lock } from "lucide-react";
 import { useAdminAuth } from "@/_core/hooks/useAdminAuth";
+import { RichTextEditor } from "@/components/RichTextEditor";
 
 interface Article {
   id: string;
@@ -305,14 +306,12 @@ export default function AdminArticles() {
                 <label className="block text-sm font-medium mb-1">
                   Conteúdo *
                 </label>
-                <Textarea
+                <RichTextEditor
                   value={formData.content || ""}
-                  onChange={(e) =>
-                    setFormData({ ...formData, content: e.target.value })
+                  onChange={(value) =>
+                    setFormData({ ...formData, content: value })
                   }
                   placeholder="Digite o conteúdo completo do artigo"
-                  rows={6}
-                  className="w-full"
                 />
               </div>
 
