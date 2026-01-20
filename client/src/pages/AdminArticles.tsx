@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Plus, Edit2, Trash2, X, Check } from "lucide-react";
+import { Plus, Edit2, Trash2, X, Check, LogOut } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 interface Article {
   id: string;
@@ -25,6 +26,7 @@ const CATEGORIES = [
 ];
 
 export default function AdminArticles() {
+  const { user, logout } = useAuth();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [articles, setArticles] = useState<Article[]>([]);
@@ -37,6 +39,7 @@ export default function AdminArticles() {
     readTime: "20 min",
   });
 
+  // Carregar artigos do localStorage
   useEffect(() => {
     loadArticles();
   }, []);
@@ -76,7 +79,7 @@ export default function AdminArticles() {
       category: formData.category || "Arquitetos do Poder",
       themeId: formData.themeId || "arquitetos-do-poder",
       readTime: formData.readTime || "20 min",
-      date: new Date().toLocaleDateString("pt-BR"),
+      date: new Date().toISOString(),
     };
 
     saveArticles([...articles, newArticle]);
@@ -148,29 +151,68 @@ export default function AdminArticles() {
     });
   };
 
+  // Se não está autenticado
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="p-8 max-w-md w-full border border-border">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4 text-foreground">
+              Painel de Admin
+            </h1>
+            <p className="text-muted-foreground mb-6">
+              Você precisa estar autenticado para acessar o painel de administração.
+            </p>
+            <Button
+              onClick={() => {
+                // Simular login
+                alert("Funcionalidade de login será implementada em breve");
+              }}
+              className="w-full bg-primary hover:bg-primary/90"
+            >
+              Fazer Login
+            </Button>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
+        {/* Header com logout */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
               Painel de Admin
             </h1>
             <p className="text-muted-foreground mt-1">
-              Gerencie seus artigos ({articles.length} artigos)
+              Bem-vindo, {user.name}! ({articles.length} artigos)
             </p>
           </div>
-          {!isCreating && !editingId && (
+          <div className="flex gap-2">
+            {!isCreating && !editingId && (
+              <Button
+                onClick={() => setIsCreating(true)}
+                className="gap-2 bg-primary hover:bg-primary/90"
+              >
+                <Plus className="w-4 h-4" />
+                Novo Artigo
+              </Button>
+            )}
             <Button
-              onClick={() => setIsCreating(true)}
-              className="gap-2 bg-primary hover:bg-primary/90"
+              onClick={() => logout()}
+              variant="outline"
+              className="gap-2"
             >
-              <Plus className="w-4 h-4" />
-              Novo Artigo
+              <LogOut className="w-4 h-4" />
+              Sair
             </Button>
-          )}
+          </div>
         </div>
 
+        {/* Formulário de Criação/Edição */}
         {(isCreating || editingId) && (
           <Card className="mb-8 p-6 border border-border">
             <h2 className="text-xl font-bold mb-4">
@@ -230,10 +272,12 @@ export default function AdminArticles() {
                   <select
                     value={formData.themeId || "arquitetos-do-poder"}
                     onChange={(e) =>
-                      setFormData({ 
-                        ...formData, 
+                      setFormData({
+                        ...formData,
                         themeId: e.target.value,
-                        category: CATEGORIES.find(c => c.id === e.target.value)?.name || "Arquitetos do Poder"
+                        category:
+                          CATEGORIES.find((c) => c.id === e.target.value)
+                            ?.name || "Arquitetos do Poder",
                       })
                     }
                     className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground"
@@ -282,11 +326,12 @@ export default function AdminArticles() {
           </Card>
         )}
 
+        {/* Lista de Artigos */}
         <div className="space-y-4">
           {articles.length === 0 ? (
             <Card className="p-8 text-center border border-border">
               <p className="text-muted-foreground">
-                Nenhum artigo. Clique em "Novo Artigo" para começar.
+                Nenhum artigo criado ainda. Clique em "Novo Artigo" para começar.
               </p>
             </Card>
           ) : (
@@ -306,7 +351,7 @@ export default function AdminArticles() {
                     <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
                       <span>📁 {article.category}</span>
                       <span>⏱️ {article.readTime}</span>
-                      <span>📅 {article.date}</span>
+                      <span>📅 {new Date(article.date).toLocaleDateString("pt-BR")}</span>
                     </div>
                   </div>
 

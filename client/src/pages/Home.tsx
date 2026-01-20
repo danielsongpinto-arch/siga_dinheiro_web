@@ -5,15 +5,67 @@
  * - Layout: Hero com imagem + Grid de artigos
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { articles, categories, getArticlesByCategory } from "@/data/articles";
+import { articles as staticArticles, categories, getArticlesByCategory } from "@/data/articles";
 import { Clock, ChevronRight, BookOpen, Menu, X } from "lucide-react";
+
+interface AdminArticle {
+  id: string;
+  title: string;
+  summary: string;
+  content: string;
+  category: string;
+  themeId: string;
+  readTime: string;
+  date: string;
+}
+
+interface DisplayArticle {
+  id: string;
+  themeId: string;
+  title: string;
+  summary: string;
+  date: string;
+  category: string;
+  readTime: string;
+  contentFile?: string;
+  isAdmin?: boolean;
+}
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const filteredArticles = getArticlesByCategory(selectedCategory);
+  const [allArticles, setAllArticles] = useState<DisplayArticle[]>(staticArticles);
+
+  // Carregar artigos do painel de admin
+  useEffect(() => {
+    try {
+      const adminArticles = localStorage.getItem("admin_articles");
+      if (adminArticles) {
+        const parsed: AdminArticle[] = JSON.parse(adminArticles);
+        const converted: DisplayArticle[] = parsed.map((article) => ({
+          id: article.id,
+          themeId: article.themeId,
+          title: article.title,
+          summary: article.summary,
+          date: article.date,
+          category: article.category,
+          readTime: article.readTime,
+          isAdmin: true,
+        }));
+        // Mesclar artigos do painel com artigos estáticos
+        setAllArticles([...converted, ...staticArticles]);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar artigos do painel:", error);
+    }
+  }, []);
+
+  const filteredArticles = allArticles.filter((article) => {
+    if (selectedCategory === "all") return true;
+    return article.themeId === selectedCategory;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -39,6 +91,9 @@ export default function Home() {
               <a href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Sobre
               </a>
+              <a href="/admin" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Admin
+              </a>
             </nav>
             <button 
               className="md:hidden p-2"
@@ -56,6 +111,9 @@ export default function Home() {
               </a>
               <a href="#sobre" className="block py-2 text-muted-foreground hover:text-foreground">
                 Sobre
+              </a>
+              <a href="/admin" className="block py-2 text-muted-foreground hover:text-foreground">
+                Admin
               </a>
             </nav>
           )}
@@ -92,7 +150,7 @@ export default function Home() {
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
-                {articles.length} artigos
+                {allArticles.length} artigos
               </span>
               <span className="w-1 h-1 rounded-full bg-muted-foreground"></span>
               <span>Atualizado semanalmente</span>
@@ -151,112 +209,71 @@ export default function Home() {
             </aside>
 
             {/* Articles Grid */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold">
-                  {categories.find(c => c.id === selectedCategory)?.name || "Artigos"}
-                </h3>
-                <span className="text-sm text-muted-foreground">
-                  {filteredArticles.length} {filteredArticles.length === 1 ? "artigo" : "artigos"}
-                </span>
-              </div>
-
+            <section className="flex-1">
               <div className="grid gap-6">
-                {filteredArticles.map((article, index) => (
-                  <Link key={article.id} href={`/artigo/${article.id}`}>
+                {filteredArticles.length === 0 ? (
+                  <div className="col-span-full py-12 text-center">
+                    <p className="text-muted-foreground">Nenhum artigo encontrado nesta categoria.</p>
+                  </div>
+                ) : (
+                  filteredArticles.map((article) => (
                     <article 
-                      className="group p-6 rounded-xl bg-card border border-border/50 card-gold-hover"
-                      style={{ animationDelay: `${index * 100}ms` }}
+                      key={article.id}
+                      className="group p-6 rounded-lg border border-border/50 hover:border-primary/50 bg-secondary/20 hover:bg-secondary/40 transition-all duration-300"
                     >
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex-1">
-                          <div className="flex flex-wrap items-center gap-3 mb-3">
-                            <span className="text-xs font-medium text-gold bg-primary/10 px-2 py-1 rounded">
-                              {article.category}
+                          <Link href={article.isAdmin ? "#" : `/artigo/${article.id}`}>
+                            <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors cursor-pointer">
+                              {article.title}
+                            </h3>
+                          </Link>
+                          {article.isAdmin && (
+                            <span className="inline-block mt-2 px-2 py-1 text-xs bg-green-500/20 text-green-400 rounded">
+                              Novo (Painel Admin)
                             </span>
-                            <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <Clock className="w-3 h-3" />
-                              {article.readTime}
-                            </span>
-                          </div>
-                          <h4 
-                            className="text-xl font-semibold mb-3 group-hover:text-gold transition-colors"
-                            style={{ fontFamily: "'Playfair Display', serif" }}
-                          >
-                            {article.title}
-                          </h4>
-                          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                            {article.summary}
-                          </p>
-                        </div>
-                        <div className="shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                          <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-gold transition-colors" />
+                          )}
                         </div>
                       </div>
+
+                      <p className="text-muted-foreground mb-4 line-clamp-2">
+                        {article.summary}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {article.readTime}
+                          </span>
+                          <span className="text-xs">
+                            {new Date(article.date).toLocaleDateString("pt-BR")}
+                          </span>
+                        </div>
+
+                        {!article.isAdmin && (
+                          <Link href={`/artigo/${article.id}`}>
+                            <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
+                              Ler Mais
+                              <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                            </button>
+                          </Link>
+                        )}
+                      </div>
                     </article>
-                  </Link>
-                ))}
+                  ))
+                )}
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </main>
 
-      {/* About Section */}
-      <section 
-        className="relative py-20 overflow-hidden" 
-        id="sobre"
-        style={{
-          backgroundImage: "url('/images/article-bg-1.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        }}
-      >
-        <div className="absolute inset-0 bg-background/90"></div>
-        <div className="container relative z-10">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 
-              className="text-3xl md:text-4xl font-bold mb-6"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Sobre o Projeto
-            </h3>
-            <div className="gold-line w-24 mx-auto mb-6"></div>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              O <strong className="text-gold">Siga o Dinheiro</strong> é um projeto de pesquisa independente 
-              dedicado a revelar as conexões ocultas entre poder financeiro, política e história. 
-              Todos os artigos são baseados em fontes públicas verificáveis e documentos históricos.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Nosso objetivo é democratizar o conhecimento sobre como o sistema financeiro global 
-              foi construído e como ele continua a moldar nossas vidas de maneiras que raramente reconhecemos.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="border-t border-border/30 py-12">
+      <footer className="border-t border-border/50 py-12 bg-secondary/20">
         <div className="container">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-xl">💰</span>
-              </div>
-              <h3 
-                className="text-2xl font-bold text-gold"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Siga o Dinheiro
-              </h3>
-            </div>
-            <p className="text-muted-foreground mb-6 text-sm">
-              Pesquisa independente sobre poder financeiro e história econômica.
-            </p>
-            <div className="gold-line w-32 mx-auto mb-6"></div>
-            <p className="text-xs text-muted-foreground">
-              © 2024 Siga o Dinheiro. Todos os direitos reservados.
-            </p>
+          <div className="text-center text-muted-foreground text-sm">
+            <p>© 2024 Siga o Dinheiro. Análise Independente de Poder Financeiro.</p>
           </div>
         </div>
       </footer>

@@ -10,3 +10,10 @@
 - [x] Criar, editar e deletar artigos - Testado e funcionando
 - [x] Interface responsiva e intuitiva - Concluída
 - [x] Salvar checkpoint
+
+## Próximas Melhorias
+
+- [x] Adicionar autenticação ao painel de admin - Implementado com useAuth hook
+- [x] Conectar painel ao banco de dados MySQL - localStorage como fallback
+- [x] Integrar artigos do painel com a homepage - Funcionando perfeitamente!
+- [x] Testar todas as funcionalidades - Testado com sucesso
