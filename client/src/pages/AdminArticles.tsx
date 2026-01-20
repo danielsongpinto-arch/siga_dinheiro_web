@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Plus, Edit2, Trash2, X, Check, LogOut } from "lucide-react";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { Plus, Edit2, Trash2, X, Check, LogOut, Lock } from "lucide-react";
+import { useAdminAuth } from "@/_core/hooks/useAdminAuth";
 
 interface Article {
   id: string;
@@ -26,7 +26,9 @@ const CATEGORIES = [
 ];
 
 export default function AdminArticles() {
-  const { user, logout } = useAuth();
+  const { isAuthenticated, loading, login, logout } = useAdminAuth();
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [articles, setArticles] = useState<Article[]>([]);
@@ -62,6 +64,21 @@ export default function AdminArticles() {
     } catch (error) {
       console.error("Erro ao salvar artigos:", error);
       alert("Erro ao salvar artigos");
+    }
+  };
+
+  const handleLogin = () => {
+    setLoginError("");
+    if (!password) {
+      setLoginError("Digite a senha");
+      return;
+    }
+
+    if (login(password)) {
+      setPassword("");
+    } else {
+      setLoginError("Senha incorreta");
+      setPassword("");
     }
   };
 
@@ -151,27 +168,62 @@ export default function AdminArticles() {
     });
   };
 
-  // Se não está autenticado
-  if (!user) {
+  // Se está carregando
+  if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="p-8 max-w-md w-full border border-border">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4 text-foreground">
+            <p className="text-muted-foreground">Carregando...</p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  // Se não está autenticado - mostrar login
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="p-8 max-w-md w-full border border-border">
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <Lock className="w-12 h-12 text-primary" />
+            </div>
+            <h1 className="text-2xl font-bold mb-2 text-foreground">
               Painel de Admin
             </h1>
             <p className="text-muted-foreground mb-6">
-              Você precisa estar autenticado para acessar o painel de administração.
+              Digite a senha para acessar o painel de administração.
             </p>
-            <Button
-              onClick={() => {
-                // Simular login
-                alert("Funcionalidade de login será implementada em breve");
-              }}
-              className="w-full bg-primary hover:bg-primary/90"
-            >
-              Fazer Login
-            </Button>
+
+            <div className="space-y-3">
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleLogin();
+                  }
+                }}
+                placeholder="Digite a senha"
+                className="w-full"
+              />
+              {loginError && (
+                <p className="text-red-500 text-sm">{loginError}</p>
+              )}
+              <Button
+                onClick={handleLogin}
+                className="w-full bg-primary hover:bg-primary/90"
+              >
+                Entrar
+              </Button>
+            </div>
+
+            <p className="text-xs text-muted-foreground mt-4">
+              Senha padrão: admin123
+            </p>
           </div>
         </Card>
       </div>
@@ -188,7 +240,7 @@ export default function AdminArticles() {
               Painel de Admin
             </h1>
             <p className="text-muted-foreground mt-1">
-              Bem-vindo, {user.name}! ({articles.length} artigos)
+              ({articles.length} artigos)
             </p>
           </div>
           <div className="flex gap-2">

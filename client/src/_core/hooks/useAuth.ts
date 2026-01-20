@@ -12,22 +12,24 @@ export function useAuth() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simular verificação de autenticação
-    // Em produção, isso faria uma chamada à API para verificar se o usuário está logado
     const checkAuth = async () => {
       try {
         setLoading(true);
-        // Verificar se há um usuário logado (por exemplo, através de um cookie de sessão)
-        // Por enquanto, vamos simular um usuário logado
-        const mockUser: User = {
-          id: "user-123",
-          name: "Admin",
-          email: "admin@example.com",
-        };
-        setUser(mockUser);
+        // Verificar se há um cookie de sessão do Manus
+        const response = await fetch("/api/auth/me", {
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setUser(userData);
+        } else {
+          setUser(null);
+        }
       } catch (err) {
         console.error("Erro ao verificar autenticação:", err);
         setError("Erro ao verificar autenticação");
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -36,10 +38,23 @@ export function useAuth() {
     checkAuth();
   }, []);
 
-  const logout = () => {
-    setUser(null);
-    // Redirecionar para login
-    window.location.href = "/";
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (err) {
+      console.error("Erro ao fazer logout:", err);
+    } finally {
+      setUser(null);
+      window.location.href = "/";
+    }
+  };
+
+  const getLoginUrl = () => {
+    // Retornar URL de login do Manus
+    return "/api/auth/login";
   };
 
   return {
@@ -48,5 +63,6 @@ export function useAuth() {
     error,
     logout,
     isAuthenticated: !!user,
+    getLoginUrl,
   };
 }
