@@ -17,3 +17,10 @@
 - [x] Conectar painel ao banco de dados MySQL - localStorage como fallback
 - [x] Integrar artigos do painel com a homepage - Funcionando perfeitamente!
 - [x] Testar todas as funcionalidades - Testado com sucesso
+
+## Melhorias Avançadas
+
+- [ ] Implementar autenticação real com OAuth/Manus Auth
+- [ ] Migrar dados para banco de dados MySQL
+- [ ] Adicionar editor WYSIWYG para artigos
+- [ ] Testar todas as funcionalidades
