@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { articles as staticArticles, categories, getArticlesByCategory } from "@/data/articles";
 import { Clock, ChevronRight, BookOpen, Menu, X } from "lucide-react";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 interface AdminArticle {
   id: string;
@@ -265,6 +266,9 @@ export default function Home() {
             </section>
           </div>
         </div>
+
+        {/* Newsletter Section */}
+        <NewsletterSignup />
       </main>
 
       {/* Footer */}
