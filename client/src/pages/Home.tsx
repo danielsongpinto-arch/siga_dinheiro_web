@@ -223,7 +223,7 @@ export default function Home() {
                     >
                       <div className="flex items-start justify-between gap-4 mb-3">
                         <div className="flex-1">
-                          <Link href={article.isAdmin ? "#" : `/artigo/${article.id}`}>
+                          <Link href={`/artigo/${article.id}`}>
                             <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors cursor-pointer">
                               {article.title}
                             </h3>
@@ -251,14 +251,12 @@ export default function Home() {
                           </span>
                         </div>
 
-                        {!article.isAdmin && (
-                          <Link href={`/artigo/${article.id}`}>
-                            <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
-                              Ler Mais
-                              <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                            </button>
-                          </Link>
-                        )}
+                        <Link href={`/artigo/${article.id}`}>
+                          <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
+                            Ler Mais
+                            <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                          </button>
+                        </Link>
                       </div>
                     </article>
                   ))

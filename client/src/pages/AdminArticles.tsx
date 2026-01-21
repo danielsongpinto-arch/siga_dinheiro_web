@@ -40,6 +40,8 @@ export default function AdminArticles() {
     themeId: "arquitetos-do-poder",
     readTime: "20 min",
   });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // Carregar artigos do localStorage
   useEffect(() => {
@@ -168,6 +170,12 @@ export default function AdminArticles() {
     });
   };
 
+  const filteredArticles = articles.filter((article) => {
+    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = !selectedCategory || article.themeId === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
   // Se está carregando
   if (loading) {
     return (
@@ -240,7 +248,7 @@ export default function AdminArticles() {
               Painel de Admin
             </h1>
             <p className="text-muted-foreground mt-1">
-              ({articles.length} artigos)
+              ({filteredArticles.length} de {articles.length} artigos)
             </p>
           </div>
           <div className="flex gap-2">
@@ -263,6 +271,52 @@ export default function AdminArticles() {
             </Button>
           </div>
         </div>
+
+        {/* Busca e Filtros */}
+        {!isCreating && !editingId && (
+          <Card className="mb-6 p-4 border border-border">
+            <div className="space-y-3">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Buscar por título
+                </label>
+                <Input
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Digite o título do artigo..."
+                  className="w-full"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Filtrar por categoria
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    onClick={() => setSelectedCategory(null)}
+                    variant={selectedCategory === null ? "default" : "outline"}
+                    size="sm"
+                    className="text-xs"
+                  >
+                    Todas
+                  </Button>
+                  {CATEGORIES.map((cat) => (
+                    <Button
+                      key={cat.id}
+                      onClick={() => setSelectedCategory(cat.id)}
+                      variant={selectedCategory === cat.id ? "default" : "outline"}
+                      size="sm"
+                      className="text-xs"
+                    >
+                      {cat.name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        )}
 
         {/* Formulário de Criação/Edição */}
         {(isCreating || editingId) && (
@@ -380,14 +434,16 @@ export default function AdminArticles() {
 
         {/* Lista de Artigos */}
         <div className="space-y-4">
-          {articles.length === 0 ? (
+          {filteredArticles.length === 0 ? (
             <Card className="p-8 text-center border border-border">
               <p className="text-muted-foreground">
-                Nenhum artigo criado ainda. Clique em "Novo Artigo" para começar.
+                {articles.length === 0
+                  ? "Nenhum artigo criado ainda. Clique em \"Novo Artigo\" para começar."
+                  : "Nenhum artigo encontrado com os filtros selecionados."}
               </p>
             </Card>
           ) : (
-            articles.map((article) => (
+            filteredArticles.map((article) => (
               <Card
                 key={article.id}
                 className="p-4 border border-border hover:border-primary/50 transition-colors"

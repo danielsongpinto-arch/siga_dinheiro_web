@@ -29,8 +29,8 @@
 
 ## Novas Funcionalidades
 
-- [ ] Adicionar busca de artigos no painel
-- [ ] Adicionar filtro por categoria no painel
-- [ ] Criar página de detalhes do artigo
-- [ ] Integrar página de detalhes com homepage
-- [ ] Testar completamente
+- [x] Adicionar busca de artigos no painel - COMPLETO
+- [x] Adicionar filtro por categoria no painel - COMPLETO
+- [x] Criar página de detalhes do artigo - COMPLETO
+- [x] Integrar página de detalhes com homepage - COMPLETO
+- [x] Testar completamente - TESTADO E FUNCIONANDO
