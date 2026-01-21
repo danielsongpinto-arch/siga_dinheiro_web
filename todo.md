@@ -18,12 +18,9 @@
 - [x] Integrar artigos do painel com a homepage - Funcionando perfeitamente!
 - [x] Testar todas as funcionalidades - Testado com sucesso
 
-## Migração para Banco de Dados (NOVO)
+## Melhorias Avançadas
 
-- [ ] Salvar checkpoint de segurança
-- [ ] Configurar schema de banco de dados
-- [ ] Criar API para CRUD de artigos
-- [ ] Atualizar painel para usar banco
-- [ ] Migrar artigos do localStorage
-- [ ] Testar completamente
-- [ ] Salvar checkpoint final
+- [ ] Implementar autenticação real com OAuth/Manus Auth
+- [ ] Migrar dados para banco de dados MySQL
+- [ ] Adicionar editor WYSIWYG para artigos
+- [ ] Testar todas as funcionalidades
