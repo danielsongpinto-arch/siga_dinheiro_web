@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Plus, Edit2, Trash2, X, Check, LogOut, Lock } from "lucide-react";
-import { useAdminAuth } from "@/_core/hooks/useAdminAuth";
+import { Plus, Edit2, Trash2, X, Check, LogOut } from "lucide-react";
 
 interface Article {
   id: string;
@@ -26,9 +25,6 @@ const CATEGORIES = [
 ];
 
 export default function AdminArticles() {
-  const { isAuthenticated, loading, login, logout } = useAdminAuth();
-  const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [articles, setArticles] = useState<Article[]>([]);
@@ -66,21 +62,6 @@ export default function AdminArticles() {
     } catch (error) {
       console.error("Erro ao salvar artigos:", error);
       alert("Erro ao salvar artigos");
-    }
-  };
-
-  const handleLogin = () => {
-    setLoginError("");
-    if (!password) {
-      setLoginError("Digite a senha");
-      return;
-    }
-
-    if (login(password)) {
-      setPassword("");
-    } else {
-      setLoginError("Senha incorreta");
-      setPassword("");
     }
   };
 
@@ -176,72 +157,10 @@ export default function AdminArticles() {
     return matchesSearch && matchesCategory;
   });
 
-  // Se está carregando
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md w-full border border-border">
-          <div className="text-center">
-            <p className="text-muted-foreground">Carregando...</p>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  // Se não está autenticado - mostrar login
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md w-full border border-border">
-          <div className="text-center">
-            <div className="flex justify-center mb-4">
-              <Lock className="w-12 h-12 text-primary" />
-            </div>
-            <h1 className="text-2xl font-bold mb-2 text-foreground">
-              Painel de Admin
-            </h1>
-            <p className="text-muted-foreground mb-6">
-              Digite a senha para acessar o painel de administração.
-            </p>
-
-            <div className="space-y-3">
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    handleLogin();
-                  }
-                }}
-                placeholder="Digite a senha"
-                className="w-full"
-              />
-              {loginError && (
-                <p className="text-red-500 text-sm">{loginError}</p>
-              )}
-              <Button
-                onClick={handleLogin}
-                className="w-full bg-primary hover:bg-primary/90"
-              >
-                Entrar
-              </Button>
-            </div>
-
-            <p className="text-xs text-muted-foreground mt-4">
-              Senha padrão: admin123
-            </p>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header com logout */}
+        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-foreground">
@@ -262,12 +181,12 @@ export default function AdminArticles() {
               </Button>
             )}
             <Button
-              onClick={() => logout()}
+              onClick={() => window.location.href = "/"}
               variant="outline"
               className="gap-2"
             >
               <LogOut className="w-4 h-4" />
-              Sair
+              Voltar
             </Button>
           </div>
         </div>
@@ -321,71 +240,60 @@ export default function AdminArticles() {
         {/* Formulário de Criação/Edição */}
         {(isCreating || editingId) && (
           <Card className="mb-8 p-6 border border-border">
-            <h2 className="text-xl font-bold mb-4">
-              {isCreating ? "Criar Novo Artigo" : "Editar Artigo"}
+            <h2 className="text-2xl font-bold mb-6 text-foreground">
+              {editingId ? "Editar Artigo" : "Novo Artigo"}
             </h2>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  Título *
-                </label>
+                <label className="block text-sm font-medium mb-2">Título *</label>
                 <Input
                   value={formData.title || ""}
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  placeholder="Digite o título do artigo"
+                  placeholder="Título do artigo"
                   className="w-full"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  Resumo *
-                </label>
+                <label className="block text-sm font-medium mb-2">Resumo *</label>
                 <Textarea
                   value={formData.summary || ""}
                   onChange={(e) =>
                     setFormData({ ...formData, summary: e.target.value })
                   }
-                  placeholder="Digite um resumo do artigo"
-                  rows={3}
+                  placeholder="Resumo breve do artigo"
                   className="w-full"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  Conteúdo *
-                </label>
+                <label className="block text-sm font-medium mb-2">Conteúdo *</label>
                 <Textarea
                   value={formData.content || ""}
                   onChange={(e) =>
                     setFormData({ ...formData, content: e.target.value })
                   }
-                  placeholder="Digite o conteúdo completo do artigo"
-                  rows={6}
-                  className="w-full"
+                  placeholder="Conteúdo completo do artigo (suporta Markdown básico)"
+                  className="w-full min-h-64"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Categoria
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Categoria</label>
                   <select
                     value={formData.themeId || "arquitetos-do-poder"}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      const selected = CATEGORIES.find((c) => c.id === e.target.value);
                       setFormData({
                         ...formData,
                         themeId: e.target.value,
-                        category:
-                          CATEGORIES.find((c) => c.id === e.target.value)
-                            ?.name || "Arquitetos do Poder",
-                      })
-                    }
+                        category: selected?.name || "Arquitetos do Poder",
+                      });
+                    }}
                     className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground"
                   >
                     {CATEGORIES.map((cat) => (
@@ -397,11 +305,9 @@ export default function AdminArticles() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Tempo de Leitura
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Tempo de Leitura</label>
                   <Input
-                    value={formData.readTime || ""}
+                    value={formData.readTime || "20 min"}
                     onChange={(e) =>
                       setFormData({ ...formData, readTime: e.target.value })
                     }
@@ -411,13 +317,13 @@ export default function AdminArticles() {
                 </div>
               </div>
 
-              <div className="flex gap-2 pt-4">
+              <div className="flex gap-3 pt-4">
                 <Button
-                  onClick={isCreating ? handleCreate : handleSaveEdit}
-                  className="gap-2 bg-green-600 hover:bg-green-700"
+                  onClick={editingId ? handleSaveEdit : handleCreate}
+                  className="gap-2 bg-primary hover:bg-primary/90"
                 >
                   <Check className="w-4 h-4" />
-                  {isCreating ? "Criar" : "Salvar"}
+                  {editingId ? "Salvar Alterações" : "Criar Artigo"}
                 </Button>
                 <Button
                   onClick={handleCancel}
@@ -433,62 +339,60 @@ export default function AdminArticles() {
         )}
 
         {/* Lista de Artigos */}
-        <div className="space-y-4">
-          {filteredArticles.length === 0 ? (
-            <Card className="p-8 text-center border border-border">
-              <p className="text-muted-foreground">
-                {articles.length === 0
-                  ? "Nenhum artigo criado ainda. Clique em \"Novo Artigo\" para começar."
-                  : "Nenhum artigo encontrado com os filtros selecionados."}
-              </p>
-            </Card>
-          ) : (
-            filteredArticles.map((article) => (
-              <Card
-                key={article.id}
-                className="p-4 border border-border hover:border-primary/50 transition-colors"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-foreground">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {article.summary}
-                    </p>
-                    <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>📁 {article.category}</span>
-                      <span>⏱️ {article.readTime}</span>
-                      <span>📅 {new Date(article.date).toLocaleDateString("pt-BR")}</span>
+        {!isCreating && !editingId && (
+          <div className="space-y-4">
+            {filteredArticles.length === 0 ? (
+              <Card className="p-8 text-center border border-border">
+                <p className="text-muted-foreground">Nenhum artigo encontrado</p>
+              </Card>
+            ) : (
+              filteredArticles.map((article) => (
+                <Card
+                  key={article.id}
+                  className="p-4 border border-border hover:border-primary/50 transition-colors"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-foreground">
+                        {article.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {article.summary}
+                      </p>
+                      <div className="flex gap-3 mt-3 text-xs text-muted-foreground">
+                        <span className="px-2 py-1 bg-primary/10 rounded">
+                          {article.category}
+                        </span>
+                        <span>{article.readTime}</span>
+                        <span>{new Date(article.date).toLocaleDateString("pt-BR")}</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-2 ml-4">
+                      <Button
+                        onClick={() => handleEdit(article)}
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                        Editar
+                      </Button>
+                      <Button
+                        onClick={() => handleDelete(article.id)}
+                        variant="outline"
+                        size="sm"
+                        className="gap-2 text-red-500 hover:text-red-600"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Deletar
+                      </Button>
                     </div>
                   </div>
-
-                  <div className="flex gap-2 ml-4">
-                    <Button
-                      onClick={() => handleEdit(article)}
-                      size="sm"
-                      variant="outline"
-                      className="gap-1"
-                      disabled={editingId !== null}
-                    >
-                      <Edit2 className="w-4 h-4" />
-                      Editar
-                    </Button>
-                    <Button
-                      onClick={() => handleDelete(article.id)}
-                      size="sm"
-                      variant="outline"
-                      className="gap-1 text-red-600 hover:text-red-700"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                      Deletar
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))
-          )}
-        </div>
+                </Card>
+              ))
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
