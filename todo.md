@@ -25,3 +25,12 @@
 - [x] Integração com homepage - FUNCIONANDO
 - [x] Site pronto para producão - APROVADO
 - [ ] Migrar para banco de dados MySQL - FUTURO (quando site crescer)
+
+
+## Novas Funcionalidades
+
+- [ ] Adicionar busca de artigos no painel
+- [ ] Adicionar filtro por categoria no painel
+- [ ] Criar página de detalhes do artigo
+- [ ] Integrar página de detalhes com homepage
+- [ ] Testar completamente
