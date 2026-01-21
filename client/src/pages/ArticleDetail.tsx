@@ -3,8 +3,6 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
-import { CommentsSection } from "@/components/CommentsSection";
-import { ShareButtons } from "@/components/ShareButtons";
 
 interface Article {
   id: string;
@@ -156,15 +154,6 @@ export default function ArticleDetail() {
           <div className="prose prose-invert max-w-none">
             {renderContent(article.content)}
           </div>
-
-          {/* Botões de compartilhamento */}
-          <ShareButtons 
-            title={article.title} 
-            url={typeof window !== 'undefined' ? window.location.href : ''} 
-          />
-
-          {/* Seção de comentários */}
-          <CommentsSection articleId={article.id} />
         </Card>
       </div>
     </div>

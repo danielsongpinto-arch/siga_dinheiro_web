@@ -38,6 +38,6 @@
 
 ## Próximos Passos Recomendados
 
-- [x] Adicionar sistema de comentários nos artigos - COMPLETO
-- [x] Criar sistema de newsletter/email - COMPLETO
-- [x] Adicionar botões de compartilhamento social - COMPLETO
+- [ ] Adicionar sistema de comentários nos artigos
+- [ ] Criar sistema de newsletter/email
+- [ ] Adicionar botões de compartilhamento social
