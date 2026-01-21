@@ -34,3 +34,10 @@
 - [x] Criar página de detalhes do artigo - COMPLETO
 - [x] Integrar página de detalhes com homepage - COMPLETO
 - [x] Testar completamente - TESTADO E FUNCIONANDO
+
+
+## Próximos Passos Recomendados
+
+- [ ] Adicionar sistema de comentários nos artigos
+- [ ] Criar sistema de newsletter/email
+- [ ] Adicionar botões de compartilhamento social
