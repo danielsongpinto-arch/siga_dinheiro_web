@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -154,11 +154,14 @@ export default function AdminArticles() {
     });
   };
 
-  const filteredArticles = articles.filter((article) => {
-    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !selectedCategory || article.themeId === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  // Usar useMemo para evitar recálculos desnecessários
+  const filteredArticles = React.useMemo(() => {
+    return articles.filter((article) => {
+      const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = !selectedCategory || article.themeId === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [articles, searchTerm, selectedCategory]);
 
   return (
     <div className="min-h-screen bg-background p-6">
