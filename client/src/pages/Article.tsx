@@ -16,7 +16,7 @@ interface ArticleContent {
   id: string;
   title: string;
   summary: string;
-  content: string;
+  content?: string;
   sections?: Array<{
     title: string;
     content: string;
@@ -31,17 +31,13 @@ export default function Article() {
 
   useEffect(() => {
     if (article) {
-      // Carregar conteúdo do artigo via fetch
-      fetch(`/data/${article.contentFile}`)
-        .then(res => res.json())
-        .then(data => {
-          setContent(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Erro ao carregar artigo:", err);
-          setLoading(false);
-        });
+      setContent({
+        id: article.id,
+        title: article.title,
+        summary: article.summary,
+        content: article.content
+      });
+      setLoading(false);
     } else {
       setLoading(false);
     }
