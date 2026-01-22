@@ -51,10 +51,12 @@ export default function AdminArticles() {
       const adminArticles = saved ? JSON.parse(saved) : [];
       
       // Combinar artigos estáticos com artigos do admin
-      const allArticles = [...adminArticles, ...staticArticles];
+      const allArticles = [...staticArticles, ...adminArticles];
+      console.log("Artigos carregados:", allArticles.length);
       setArticles(allArticles);
     } catch (error) {
       console.error("Erro ao carregar artigos:", error);
+      setArticles(staticArticles);
     }
   };
 
