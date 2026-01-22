@@ -265,6 +265,44 @@ export default function Home() {
         </div>
       </main>
 
+      {/* Seção Sobre */}
+      <section id="sobre" className="py-16 bg-secondary/30 border-t border-border/50">
+        <div className="container max-w-4xl">
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold text-foreground mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Sobre o Siga o Dinheiro
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Siga o Dinheiro é uma plataforma de análise independente dedicada a investigar as conexões ocultas entre poder financeiro, política e história. Nosso objetivo é revelar como os arquitetos do sistema financeiro global moldaram o mundo moderno.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-lg font-bold text-primary mb-3">Nossa Missão</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Fornecer análises profundas e documentadas sobre os mecanismos de controle financeiro, desde a criação do Federal Reserve até os movimentos geopolíticos contemporâneos como os BRICS.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-primary mb-3">Metodologia</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Utilizamos fontes públicas verificáveis, documentos históricos e pesquisa independente para construir narrativas que conectam eventos aparentemente desconexos em um padrão coerente de poder.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-secondary/50 p-6 rounded-lg border border-border/50">
+              <h3 className="text-lg font-bold text-foreground mb-3">Contato e Feedback</h3>
+              <p className="text-muted-foreground text-sm">
+                Suas sugestões e críticas são bem-vindas. Se você identificou uma fonte importante ou tem uma análise para compartilhar, entre em contato através do formulário de newsletter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-border/50 py-12 bg-secondary/20">
         <div className="container">
