@@ -3,15 +3,18 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { articles as staticArticles } from "@/data/articles";
 
 interface Article {
   id: string;
   title: string;
   summary: string;
-  content: string;
+  content?: string;
   category: string;
   readTime: string;
   date: string;
+  themeId?: string;
+  contentFile?: string;
 }
 
 export default function ArticleDetail() {
@@ -28,10 +31,13 @@ export default function ArticleDetail() {
 
     // Buscar artigos do localStorage
     const articlesJson = localStorage.getItem("admin_articles");
-    const articles: Article[] = articlesJson ? JSON.parse(articlesJson) : [];
+    const adminArticles: Article[] = articlesJson ? JSON.parse(articlesJson) : [];
+    
+    // Combinar artigos estáticos com artigos do admin
+    const allArticles = [...adminArticles, ...staticArticles];
 
     // Encontrar artigo pelo ID
-    const found = articles.find((a) => a.id === params.id);
+    const found = allArticles.find((a) => a.id === params.id);
 
     if (found) {
       setArticle(found);
@@ -152,7 +158,7 @@ export default function ArticleDetail() {
 
           {/* Conteúdo */}
           <div className="prose prose-invert max-w-none">
-            {renderContent(article.content)}
+            {renderContent(article.content || "")}
           </div>
         </Card>
       </div>
