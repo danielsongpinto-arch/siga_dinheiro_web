@@ -251,11 +251,9 @@ export default function Home() {
                           </span>
                         </div>
 
-                        <Link href={`/artigo/${article.id}`}>
-                          <button className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
-                            Ler Mais
-                            <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                          </button>
+                        <Link href={`/artigo/${article.id}`} className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
+                          Ler Mais
+                          <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                         </Link>
                       </div>
                     </article>

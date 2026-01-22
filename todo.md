@@ -38,6 +38,14 @@
 
 ## Próximos Passos Recomendados
 
-- [ ] Adicionar sistema de comentários nos artigos
-- [ ] Criar sistema de newsletter/email
-- [ ] Adicionar botões de compartilhamento social
+- [x] Adicionar sistema de comentários nos artigos - COMPLETO
+- [x] Criar sistema de newsletter/email - COMPLETO
+- [x] Adicionar botões de compartilhamento social - COMPLETO
+
+## Status Atual
+
+- [ ] AGUARDANDO: Solução da equipe Manus para problema de permissão de publicação
+  - Relatório enviado para help.manus.im
+  - Problema: Botão "Publish" desabilitado com erro de permissão
+  - Causa provável: Resquícios de autenticação local conflitando com OAuth do Manus
+  - Ação: Aguardando orientação da equipe Manus
