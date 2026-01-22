@@ -205,11 +205,12 @@ export default function AdminArticles() {
                 <label className="block text-sm font-medium mb-2">
                   Buscar por título
                 </label>
-                <Input
+                <input
+                  type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Digite o título do artigo..."
-                  className="w-full"
+                  className="w-full px-3 py-2 border border-border rounded-md bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
 
