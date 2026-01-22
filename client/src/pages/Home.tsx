@@ -295,11 +295,64 @@ export default function Home() {
 
             <div className="bg-secondary/50 p-6 rounded-lg border border-border/50">
               <h3 className="text-lg font-bold text-foreground mb-3">Contato e Feedback</h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm mb-4">
                 Suas sugestões e críticas são bem-vindas. Se você identificou uma fonte importante ou tem uma análise para compartilhar, entre em contato através do formulário de newsletter.
               </p>
+              <a href="#newsletter" className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                Enviar Feedback
+              </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section id="newsletter" className="py-16 bg-primary/10 border-t border-border/50">
+        <div className="container max-w-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Receba Análises Exclusivas
+            </h2>
+            <p className="text-muted-foreground">
+              Inscreva-se para receber novos artigos, análises profundas e feedback direto sobre investigações financeiras.
+            </p>
+          </div>
+          
+          <form className="space-y-4" onSubmit={(e) => {
+            e.preventDefault();
+            const email = (e.target as HTMLFormElement).email?.value;
+            const feedback = (e.target as HTMLFormElement).feedback?.value;
+            if (email) {
+              localStorage.setItem('newsletter_email', email);
+              localStorage.setItem('newsletter_feedback', feedback || '');
+              alert('Obrigado! Seu feedback foi recebido.');
+              (e.target as HTMLFormElement).reset();
+            }
+          }}>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Seu email"
+                required
+                className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
+              />
+            </div>
+            <div>
+              <textarea
+                name="feedback"
+                placeholder="Suas sugestões, críticas ou análises (opcional)..."
+                rows={4}
+                className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            >
+              Enviar Feedback e Inscrever-se
+            </button>
+          </form>
         </div>
       </section>
 
