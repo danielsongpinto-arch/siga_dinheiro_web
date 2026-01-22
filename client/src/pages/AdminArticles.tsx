@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Plus, Edit2, Trash2, X, Check, LogOut } from "lucide-react";
+import { articles as staticArticles } from "@/data/articles";
 
 interface Article {
   id: string;
@@ -47,9 +48,11 @@ export default function AdminArticles() {
   const loadArticles = () => {
     try {
       const saved = localStorage.getItem("admin_articles");
-      if (saved) {
-        setArticles(JSON.parse(saved));
-      }
+      const adminArticles = saved ? JSON.parse(saved) : [];
+      
+      // Combinar artigos estáticos com artigos do admin
+      const allArticles = [...adminArticles, ...staticArticles];
+      setArticles(allArticles);
     } catch (error) {
       console.error("Erro ao carregar artigos:", error);
     }
