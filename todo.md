@@ -44,8 +44,14 @@
 
 ## Status Atual
 
-- [ ] AGUARDANDO: Solução da equipe Manus para problema de permissão de publicação
-  - Relatório enviado para help.manus.im
-  - Problema: Botão "Publish" desabilitado com erro de permissão
-  - Causa provável: Resquícios de autenticação local conflitando com OAuth do Manus
-  - Ação: Aguardando orientação da equipe Manus
+- [x] RESOLVIDO: Solução da equipe Manus para problema de permissão de publicação
+
+## Problemas Críticos a Resolver (31 créditos)
+
+- [x] Criar painel admin com link secreto protegido - COMPLETO (/painel-secreto-12345)
+- [x] Remover link Admin da homepage pública - COMPLETO
+- [ ] Corrigir duplicação de artigos (7 + 7 = 14) - PENDENTE
+- [ ] Corrigir busca por título (não funciona) - PENDENTE
+- [ ] Corrigir filtro por categoria (não funciona) - PENDENTE
+- [ ] Testar segurança completa - PENDENTE
+- [ ] Salvar checkpoint final - PENDENTE

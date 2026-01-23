@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ArticleDetail from "./pages/ArticleDetail";
 import AdminArticles from "./pages/AdminArticles";
+import AdminSecretPanel from "./pages/AdminSecretPanel";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/artigo/:id" component={ArticleDetail} />
       <Route path="/admin" component={AdminArticles} />
+      <Route path="/painel-secreto-12345" component={AdminSecretPanel} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

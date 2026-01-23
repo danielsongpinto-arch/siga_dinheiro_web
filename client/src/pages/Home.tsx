@@ -91,9 +91,7 @@ export default function Home() {
               <a href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Sobre
               </a>
-              <a href="/admin" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Admin
-              </a>
+
             </nav>
             <button 
               className="md:hidden p-2"
