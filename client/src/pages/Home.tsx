@@ -74,19 +74,20 @@ export default function Home() {
         <div className="container py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-xl">💰</span>
-              </div>
+              <img src="/logo-dgp.jpg" alt="DGP Logo" className="w-12 h-12 rounded-full object-cover" />
               <div>
                 <h1 className="text-xl font-bold text-gold" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Siga o Dinheiro
+                  Siga o Conhecimento
                 </h1>
-                <p className="text-xs text-muted-foreground">Análise Financeira</p>
+                <p className="text-xs text-muted-foreground">Análise feita por Danielson Gomes Pinto</p>
               </div>
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <a href="#artigos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Artigos
+              </a>
+              <a href="#videos" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                Vídeos
               </a>
               <a href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Sobre
@@ -139,10 +140,10 @@ export default function Home() {
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Revelando as Conexões Ocultas do Poder Financeiro
+              Revelando as Conexões Ocultas do Poder da Mente
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Análises aprofundadas sobre os arquitetos do sistema financeiro global, 
+              Análises aprofundadas sobre os arquitetos do sistema (Matrix) global, 
               suas estratégias de controle e como elas moldaram o mundo moderno.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -160,6 +161,13 @@ export default function Home() {
               className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
             >
               Explorar Artigos
+              <ChevronRight className="w-4 h-4" />
+            </a>
+            <a 
+              href="#videos"
+              className="inline-flex items-center gap-2 mt-4 ml-4 px-6 py-3 bg-blue-400 text-white rounded-lg font-medium hover:bg-blue-500 transition-colors"
+            >
+              Explorar Vídeo
               <ChevronRight className="w-4 h-4" />
             </a>
           </div>
@@ -351,6 +359,817 @@ export default function Home() {
               Enviar Feedback e Inscrever-se
             </button>
           </form>
+        </div>
+      </section>
+
+      {/* Vídeos Section */}
+      <section id="videos" className="py-20 border-t border-border/50">
+        <div className="container">
+          <h3 className="text-3xl font-bold mb-12 text-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>
+            Vídeos Exclusivos
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a
+              href="https://youtu.be/wQkqGjeSYS0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Matrix episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/KcJEvjZyau4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Xadrez de Trump
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/KHgFUNrcjC0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Código da Pilhagem
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/gvwVvDqrDkM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Jornada do Lider
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/Oza20WSsWp8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Que é Dinheiro
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/olrqi1xXmOQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A ilusão de Solvencia
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/GXLrObtcmmU"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Matrix episódio 2
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/q591rSYdF1s"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Sinais Convergentes
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/rtw-W4PkXPo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Matrix episódio 3
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/rhvNjVfii5Y"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Matrix episódio 4
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/PedTJ4cWtg8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Padrão Ouro episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/fa7PucG1P9A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Arquiteto do Poder episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/9Ic0aSzH27E"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Arquiteto do Poder episódio 2
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/BBlLHHu8qco"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Arquiteto do Poder episódio 3
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/rWF_Fc880sc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Arquiteto do Poder episódio 4
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/ukiGePd0Puw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Império da Prata
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/Wf_WRNw4IfA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Relação entre Segunda Guerra Mundial e o Ouro
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/9R4qo9MQHno"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Dívida Impagável
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/Pgbxn3dKleM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Nova Ordem Mundial
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/I4Yr6eEa3wc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  BRICS episódio 2
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/37QJfucHwWY"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  BRICS episódio 3
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/BKtbE-3p81c"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Para onde foi o Ouro? episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/Hsd1oG7mv14"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Para onde foi o Ouro? episódio 2
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/uE3MGuFZS_Y"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Para onde foi o Ouro? episódio 3
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/9R4qo9MQHno"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Dívida Impagável Parte II
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/a0Iz8Vdxn2w"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Matrix 2.0 episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/muARK4yE7Zc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Laço da Dopamina episódio 1
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/gASnrQpLlvU"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Grande Reset
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/gASnrQpLlvU"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Ciclo
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtube.com/shorts/kH3YeKKNZ2E?feature=share"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Novo Guardião
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/5nxnasyWC9E"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Novo Padrão
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/MUnvqoJO0Pg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Novo Padrão Versão Horizontal
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/Wrr7DzBBmF4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Liberdade
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/upEOaAQLLb0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Para onde foi o Ouro? episódio 5
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/aSVt5pgj8f8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Sistema se Auto Alimenta
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/ryAue_LUcfc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Despertar Final
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/GUWZq816tqk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Sinuca de Bico
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/0w272ioLnkI"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Manipulação
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/zi8NwkRWXMM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Ouro Nasceu para Brilhar
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/etI4y7DidGo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Qual a Relação entre o Ouro e o BRICS?
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/i-1j5WBwTbg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Relação entre Ouro e BRICS
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/969IElRKRSA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Terras Raras
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/cyHkFnB6kyA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Terras Raras em Espanhol
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/ily-Q_npvkM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Terras Raras em Espanhol Versão Vertical
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/xuoifULhkYA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Os Juros
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/QFMm8Io8qGE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Dólar Mais Fraco?
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/okKQlyE3lKk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Poder da Mente
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/NIenJZPB8Tg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  O Poder da Mente Versão Vertical
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/gKa8bYPZLh0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  A Matrix da Mente
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+            <a
+              href="https://youtu.be/aUHc2aKm-DQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-6 rounded-lg bg-secondary/30 border border-border/50 hover:border-blue-400 hover:bg-secondary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-400/20 flex items-center justify-center">
+                  <span className="text-blue-400">▶</span>
+                </div>
+                <h4 className="text-lg font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                  Xeque Mate da China?
+                </h4>
+              </div>
+              <p className="text-sm text-muted-foreground">Assista ao vídeo exclusivo</p>
+            </a>
+          </div>
         </div>
       </section>
 
