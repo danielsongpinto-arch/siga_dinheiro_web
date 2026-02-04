@@ -256,15 +256,7 @@ export default function Home() {
 
                       <textarea className="w-full p-3 rounded-lg bg-secondary/50 border border-border/50 text-muted-foreground text-sm mb-4 resize-none focus:outline-none focus:border-primary/50" rows={3} placeholder="Descreva o conteudo deste video..." />
 
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {article.readTime}
-                        </span>
-                        <span className="text-xs">
-                          {new Date(article.date).toLocaleDateString("pt-BR")}
-                        </span>
-                      </div>
+
                     </article>
                   ))
                 )}
