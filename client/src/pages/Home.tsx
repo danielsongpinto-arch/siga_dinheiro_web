@@ -218,6 +218,10 @@ export default function Home() {
 
                 {/* Info Box */}
                 <div className="hidden lg:block mt-8 p-4 rounded-lg bg-secondary/30 border border-border/50">
+                  <h4 className="text-sm font-semibold mb-2">Como Usar</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                    Ao lado esta o titulo de cada video e sua descricao do que se trata. Logo abaixo voce vai encontrar todos os videos disponiveis.
+                  </p>
                   <h4 className="text-sm font-semibold mb-2">Sobre o Projeto</h4>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     Pesquisa independente baseada em fontes públicas e documentos históricos verificáveis.
@@ -316,62 +320,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section id="newsletter" className="py-16 bg-primary/10 border-t border-border/50">
-        <div className="container max-w-2xl">
 
-          <form className="space-y-4" onSubmit={async (e) => {
-            e.preventDefault();
-            const email = (e.target as HTMLFormElement).email?.value;
-            const feedback = (e.target as HTMLFormElement).feedback?.value;
-            if (email && feedback) {
-              feedbackMutation.mutate(
-                { email, message: feedback },
-                {
-                  onSuccess: (result) => {
-                    if (result.success) {
-                      alert('Obrigado! Seu feedback foi enviado com sucesso.');
-                    } else {
-                      alert('Feedback salvo localmente.');
-                      localStorage.setItem('newsletter_email', email);
-                      localStorage.setItem('newsletter_feedback', feedback);
-                    }
-                    (e.target as HTMLFormElement).reset();
-                  },
-                  onError: (error) => {
-                    console.error('Erro ao enviar feedback:', error);
-                    localStorage.setItem('newsletter_email', email);
-                    localStorage.setItem('newsletter_feedback', feedback);
-                    alert('Feedback salvo localmente.');
-                    (e.target as HTMLFormElement).reset();
-                  },
-                }
-              )
-            } else {
-              alert('Por favor, preencha email e mensagem.');
-            }
-          }}>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Seu email"
-                required
-                className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 transition-colors"
-              />
-            </div>
-            <div>
-              <textarea
-                name="feedback"
-                placeholder="Suas sugestões, críticas ou análises (opcional)..."
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
-              />
-            </div>
-
-          </form>
-        </div>
-      </section>
 
       {/* Vídeos Section */}
       <section id="videos" className="py-20 border-t border-border/50">
