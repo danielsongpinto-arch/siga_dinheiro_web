@@ -84,12 +84,7 @@ export const articles: Article[] = [
 ];
 
 export const categories = [
-  { id: "all", name: "Todos os Conteúdos", icon: "📚" },
-  { id: "arquitetos-do-poder", name: "Arquitetos do Poder", icon: "🏛️" },
-  { id: "rockefeller", name: "Rockefeller", icon: "🛢️" },
-  { id: "sistema-autoperpetuante", name: "Sistema Monetário", icon: "💰" },
-  { id: "brics", name: "BRICS", icon: "🌍" },
-  { id: "ww2", name: "Segunda Guerra", icon: "⚔️" }
+  { id: "all", name: "Todos os Conteúdos" }
 ];
 
 export function getArticlesByCategory(categoryId: string): Article[] {

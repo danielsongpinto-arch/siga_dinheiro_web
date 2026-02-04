@@ -314,5 +314,47 @@ export const videoContents: VideoContent[] = [
     description: "",
     videoUrl: "https://youtu.be/aUHc2aKm-DQ",
     date: "2024-12-22"
+  },
+  {
+    id: "video-045",
+    title: "BRICS episódio 1",
+    description: "",
+    videoUrl: "https://youtu.be/BRICS1",
+    date: "2024-12-22"
+  },
+  {
+    id: "video-046",
+    title: "Para onde foi o Ouro? episódio 4",
+    description: "",
+    videoUrl: "https://youtu.be/ouro4",
+    date: "2024-12-22"
+  },
+  {
+    id: "video-047",
+    title: "O Laço da Dopamina episódio 2",
+    description: "",
+    videoUrl: "https://youtu.be/dopamina2",
+    date: "2024-12-22"
+  },
+  {
+    id: "video-048",
+    title: "Matrix 2.0 episódio 2",
+    description: "",
+    videoUrl: "https://youtu.be/matrix2_2",
+    date: "2024-12-22"
+  },
+  {
+    id: "video-049",
+    title: "O Poder da Mente Versão Horizontal",
+    description: "",
+    videoUrl: "https://youtu.be/mente_h",
+    date: "2024-12-22"
+  },
+  {
+    id: "video-050",
+    title: "A Verdade Oculta",
+    description: "",
+    videoUrl: "https://youtu.be/verdade",
+    date: "2024-12-22"
   }
 ];

@@ -8,6 +8,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { articles as staticArticles, categories, getArticlesByCategory } from "@/data/articles";
+import { videoContents } from "@/data/videos";
 import { Clock, ChevronRight, BookOpen, Menu, X } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
@@ -37,7 +38,15 @@ interface DisplayArticle {
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [allArticles, setAllArticles] = useState<DisplayArticle[]>(staticArticles);
+  const [allArticles, setAllArticles] = useState<DisplayArticle[]>(videoContents.map(video => ({
+    id: video.id,
+    themeId: "all",
+    title: video.title,
+    summary: video.description || "",
+    date: video.date,
+    category: "Conteúdo",
+    readTime: "Vídeo"
+  })));
   const feedbackMutation = trpc.feedback.submit.useMutation();
 
   // Carregar artigos do painel de admin
@@ -64,10 +73,7 @@ export default function Home() {
     }
   }, []);
 
-  const filteredArticles = allArticles.filter((article) => {
-    if (selectedCategory === "all") return true;
-    return article.themeId === selectedCategory;
-  });
+  const filteredArticles = allArticles;
 
   return (
     <div className="min-h-screen bg-background">
@@ -205,7 +211,6 @@ export default function Home() {
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                       }`}
                     >
-                      <span className="text-lg">{cat.icon}</span>
                       <span className="text-sm font-medium">{cat.name}</span>
                     </button>
                   ))}
@@ -249,25 +254,16 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-4 line-clamp-2">
-                        {article.summary}
-                      </p>
+                      <textarea className="w-full p-3 rounded-lg bg-secondary/50 border border-border/50 text-muted-foreground text-sm mb-4 resize-none focus:outline-none focus:border-primary/50" rows={3} placeholder="Descreva o conteudo deste video..." />
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {article.readTime}
-                          </span>
-                          <span className="text-xs">
-                            {new Date(article.date).toLocaleDateString("pt-BR")}
-                          </span>
-                        </div>
-
-                        <Link href={`/artigo/${article.id}`} className="text-primary hover:text-primary/80 transition-colors text-sm font-medium flex items-center gap-1 group/btn">
-                          Ler Mais
-                          <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                        </Link>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {article.readTime}
+                        </span>
+                        <span className="text-xs">
+                          {new Date(article.date).toLocaleDateString("pt-BR")}
+                        </span>
                       </div>
                     </article>
                   ))
