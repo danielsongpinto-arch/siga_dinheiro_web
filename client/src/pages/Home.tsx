@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { articles as staticArticles, categories, getArticlesByCategory } from "@/data/articles";
 import { Clock, ChevronRight, BookOpen, Menu, X } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 interface AdminArticle {
   id: string;
@@ -37,6 +38,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [allArticles, setAllArticles] = useState<DisplayArticle[]>(staticArticles);
+  const feedbackMutation = trpc.feedback.submit.useMutation();
 
   // Carregar artigos do painel de admin
   useEffect(() => {
@@ -82,7 +84,7 @@ export default function Home() {
                 <p className="text-xs text-muted-foreground">Análise feita por Danielson Gomes Pinto</p>
               </div>
             </div>
-            <nav className="hidden md:flex items-center gap-6">
+             <nav className="hidden md:flex items-center gap-6">
               <a href="#artigos" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Artigos
               </a>
@@ -92,7 +94,9 @@ export default function Home() {
               <a href="#sobre" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Sobre
               </a>
-
+              <a href="/patrocinadores" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Patrocinadores
+              </a>
             </nav>
             <button 
               className="md:hidden p-2"
@@ -111,6 +115,9 @@ export default function Home() {
               <a href="#sobre" className="block py-2 text-muted-foreground hover:text-foreground">
                 Sobre
               </a>
+              <a href="/patrocinadores" className="block py-2 text-muted-foreground hover:text-foreground">
+                Patrocinadores
+              </a>
               <a href="/admin" className="block py-2 text-muted-foreground hover:text-foreground">
                 Admin
               </a>
@@ -125,7 +132,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: "url('/images/hero-banner.jpg')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663282195983/XBcNxORoraEOOdIB.jpg')",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/70"></div>
@@ -335,15 +342,33 @@ export default function Home() {
             </p>
           </div>
           
-          <form className="space-y-4" onSubmit={(e) => {
+          <form className="space-y-4" onSubmit={async (e) => {
             e.preventDefault();
             const email = (e.target as HTMLFormElement).email?.value;
             const feedback = (e.target as HTMLFormElement).feedback?.value;
             if (email && feedback) {
-              localStorage.setItem('newsletter_email', email);
-              localStorage.setItem('newsletter_feedback', feedback);
-              alert('Obrigado! Seu feedback foi recebido.');
-              (e.target as HTMLFormElement).reset();
+              feedbackMutation.mutate(
+                { email, message: feedback },
+                {
+                  onSuccess: (result) => {
+                    if (result.success) {
+                      alert('Obrigado! Seu feedback foi enviado com sucesso.');
+                    } else {
+                      alert('Feedback salvo localmente.');
+                      localStorage.setItem('newsletter_email', email);
+                      localStorage.setItem('newsletter_feedback', feedback);
+                    }
+                    (e.target as HTMLFormElement).reset();
+                  },
+                  onError: (error) => {
+                    console.error('Erro ao enviar feedback:', error);
+                    localStorage.setItem('newsletter_email', email);
+                    localStorage.setItem('newsletter_feedback', feedback);
+                    alert('Feedback salvo localmente.');
+                    (e.target as HTMLFormElement).reset();
+                  },
+                }
+              )
             } else {
               alert('Por favor, preencha email e mensagem.');
             }

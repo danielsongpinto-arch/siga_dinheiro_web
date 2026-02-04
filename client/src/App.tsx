@@ -8,12 +8,14 @@ import Home from "./pages/Home";
 import ArticleDetail from "./pages/ArticleDetail";
 import AdminArticles from "./pages/AdminArticles";
 import AdminSecretPanel from "./pages/AdminSecretPanel";
+import Sponsors from "./pages/Sponsors";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/artigo/:id" component={ArticleDetail} />
+      <Route path="/patrocinadores" component={Sponsors} />
       <Route path="/admin" component={AdminArticles} />
       <Route path="/painel-secreto-12345" component={AdminSecretPanel} />
       <Route path="/404" component={NotFound} />
