@@ -319,15 +319,7 @@ export default function Home() {
       {/* Newsletter Section */}
       <section id="newsletter" className="py-16 bg-primary/10 border-t border-border/50">
         <div className="container max-w-2xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-foreground mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Receba Análises Exclusivas
-            </h2>
-            <p className="text-muted-foreground">
-              Inscreva-se para receber novos artigos, análises profundas e feedback direto sobre siga o conhecimento.
-            </p>
-          </div>
-          
+
           <form className="space-y-4" onSubmit={async (e) => {
             e.preventDefault();
             const email = (e.target as HTMLFormElement).email?.value;
