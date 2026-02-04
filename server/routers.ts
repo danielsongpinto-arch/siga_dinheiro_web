@@ -9,6 +9,7 @@ import {
   getArticlesByCategory,
 } from "./db";
 import { NewArticle } from "../drizzle/schema";
+import { sendFeedbackEmail } from "./feedback";
 
 export const appRouter = router({
   articles: router({
@@ -118,6 +119,28 @@ export const appRouter = router({
           return { success: true };
         } catch (error) {
           console.error("Erro ao deletar artigo:", error);
+          throw error;
+        }
+      }),
+  }),
+
+  feedback: router({
+    submit: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email(),
+          message: z.string().min(1),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          const success = await sendFeedbackEmail({
+            email: input.email,
+            message: input.message,
+          });
+          return { success };
+        } catch (error) {
+          console.error("Erro ao enviar feedback:", error);
           throw error;
         }
       }),

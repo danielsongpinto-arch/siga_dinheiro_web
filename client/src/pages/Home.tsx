@@ -302,8 +302,19 @@ export default function Home() {
             <div className="bg-secondary/50 p-6 rounded-lg border border-border/50">
               <h3 className="text-lg font-bold text-foreground mb-3">Contato e Feedback</h3>
               <p className="text-muted-foreground text-sm mb-4">
-                Suas sugestões e críticas são bem-vindas. Se você identificou uma fonte importante ou tem uma análise para compartilhar, entre em contato através do formulário de newsletter.
+                Suas sugestões e críticas são bem-vindas. Se você identificou uma fonte importante ou tem uma análise para compartilhar, entre em contato através dos canais abaixo:
               </p>
+              <div className="space-y-3 mb-4">
+                <div>
+                  <p className="text-sm text-muted-foreground"><strong>Email:</strong> <a href="mailto:dgp@sigaodinheiro.com" className="text-primary hover:underline">dgp@sigaodinheiro.com</a></p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground"><strong>YouTube:</strong> <a href="https://youtube.com/@DGP_s" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@DGP_s</a></p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground"><strong>Instagram:</strong> <a href="https://instagram.com/dgp_siga" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@dgp_siga</a></p>
+                </div>
+              </div>
               <a href="#newsletter" className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
                 Enviar Feedback
               </a>
@@ -328,11 +339,13 @@ export default function Home() {
             e.preventDefault();
             const email = (e.target as HTMLFormElement).email?.value;
             const feedback = (e.target as HTMLFormElement).feedback?.value;
-            if (email) {
+            if (email && feedback) {
               localStorage.setItem('newsletter_email', email);
-              localStorage.setItem('newsletter_feedback', feedback || '');
+              localStorage.setItem('newsletter_feedback', feedback);
               alert('Obrigado! Seu feedback foi recebido.');
               (e.target as HTMLFormElement).reset();
+            } else {
+              alert('Por favor, preencha email e mensagem.');
             }
           }}>
             <div>
@@ -1176,8 +1189,22 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-border/50 py-12 bg-secondary/20">
         <div className="container">
-          <div className="text-center text-muted-foreground text-sm">
-            <p>© 2024 Siga o Dinheiro. Análise Independente de Poder Financeiro.</p>
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div className="text-center">
+              <h4 className="text-sm font-bold text-foreground mb-2">Contato</h4>
+              <a href="mailto:dgp@sigaodinheiro.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">dgp@sigaodinheiro.com</a>
+            </div>
+            <div className="text-center">
+              <h4 className="text-sm font-bold text-foreground mb-2">YouTube</h4>
+              <a href="https://youtube.com/@DGP_s" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">@DGP_s</a>
+            </div>
+            <div className="text-center">
+              <h4 className="text-sm font-bold text-foreground mb-2">Instagram</h4>
+              <a href="https://instagram.com/dgp_siga" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">@dgp_siga</a>
+            </div>
+          </div>
+          <div className="border-t border-border/30 pt-8 text-center text-muted-foreground text-sm">
+            <p>© 2024 Siga o Conhecimento. Análise Independente de Poder Financeiro.</p>
           </div>
         </div>
       </footer>
