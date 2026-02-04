@@ -310,9 +310,7 @@ export default function Home() {
                   <p className="text-sm text-muted-foreground"><strong>Instagram:</strong> <a href="https://instagram.com/dgp_siga" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@dgp_siga</a></p>
                 </div>
               </div>
-              <a href="#newsletter" className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
-                Enviar Feedback
-              </a>
+
             </div>
           </div>
         </div>
@@ -378,12 +376,7 @@ export default function Home() {
                 className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border/50 text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/50 transition-colors resize-none"
               />
             </div>
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-            >
-              Enviar Feedback e Inscrever-se
-            </button>
+
           </form>
         </div>
       </section>
