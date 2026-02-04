@@ -143,7 +143,7 @@ export default function Home() {
               Revelando as Conexões Ocultas do Poder da Mente
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Análises aprofundadas sobre os arquitetos do sistema (Matrix) global, 
+              Análises aprofundadas sobre os arquitetos do sistema matrix, 
               suas estratégias de controle e como elas moldaram o mundo moderno.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -277,10 +277,10 @@ export default function Home() {
           <div className="space-y-8">
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Sobre o Siga o Dinheiro
+                Sobre o Siga o Conhecimento
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Siga o Dinheiro é uma plataforma de análise independente dedicada a investigar as conexões ocultas entre poder financeiro, política e história. Nosso objetivo é revelar como os arquitetos do sistema financeiro global moldaram o mundo moderno.
+                Siga o Conhecimento é uma plataforma de análise independente dedicada a investigar as conexões ocultas entre poder financeiro, política e história. Nosso objetivo é revelar como os arquitetos do sistema financeiro global moldaram o mundo moderno.
               </p>
             </div>
 
@@ -320,7 +320,7 @@ export default function Home() {
               Receba Análises Exclusivas
             </h2>
             <p className="text-muted-foreground">
-              Inscreva-se para receber novos artigos, análises profundas e feedback direto sobre investigações financeiras.
+              Inscreva-se para receber novos artigos, análises profundas e feedback direto sobre siga o conhecimento.
             </p>
           </div>
           
