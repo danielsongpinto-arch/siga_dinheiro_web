@@ -167,7 +167,7 @@ export default function Home() {
               href="#artigos"
               className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
             >
-              Explorar Artigos
+              Explorar Conteúdo
               <ChevronRight className="w-4 h-4" />
             </a>
             <a 

@@ -84,7 +84,7 @@ export const articles: Article[] = [
 ];
 
 export const categories = [
-  { id: "all", name: "Todos os Artigos", icon: "📚" },
+  { id: "all", name: "Todos os Conteúdos", icon: "📚" },
   { id: "arquitetos-do-poder", name: "Arquitetos do Poder", icon: "🏛️" },
   { id: "rockefeller", name: "Rockefeller", icon: "🛢️" },
   { id: "sistema-autoperpetuante", name: "Sistema Monetário", icon: "💰" },
